@@ -28,13 +28,22 @@ class _IOS9SiriWave {
 }
 
 class IOS9SiriWavePainter extends CustomPainter {
-  IOS9SiriWavePainter({
+  IOS9SiriWavePainter( {
     required this.animationController,
     required this.controller,
-  }) : super(repaint: animationController);
-
+     this.waveColorsList=const [
+       Color.fromRGBO(173, 57, 76, 1),
+       Color.fromRGBO(48, 220, 155, 1),
+       Color.fromRGBO(15, 82, 169, 1),
+     ],
+  }) : super(repaint: animationController) {
+    _waves['red'] = _IOS9SiriWave(color: waveColorsList[0]);
+    _waves['green'] = _IOS9SiriWave(color: waveColorsList[1]);
+    _waves['blue'] = _IOS9SiriWave(color: waveColorsList[2]);
+  }
   final AnimationController animationController;
   final SiriWaveController controller;
+  final List<Color> waveColorsList ;
 
   static const _amplitudeFactor = .8;
   static const _amplitudeRanges = <double>[.3, 1];
@@ -48,18 +57,15 @@ class IOS9SiriWavePainter extends CustomPainter {
   static const _pixelDepth = .1;
   static const _speedFactor = 1;
   static const _speedRanges = <double>[.5, 1];
-  static const _waveColors = [
+/*  static const _waveColors = [
     Color.fromRGBO(173, 57, 76, 1),
     Color.fromRGBO(48, 220, 155, 1),
     Color.fromRGBO(15, 82, 169, 1),
-  ];
+  ];*/
   static const _widthRanges = [1, 3];
 
-  final _waves = <String, _IOS9SiriWave>{
-    'red': _IOS9SiriWave(color: _waveColors[0]),
-    'green': _IOS9SiriWave(color: _waveColors[1]),
-    'blue': _IOS9SiriWave(color: _waveColors[2]),
-  };
+  final _waves = <String, _IOS9SiriWave>{};
+
 
   num _getRandomRange(List<num> e) =>
       e[0] + math.Random().nextDouble() * (e[1] - e[0]);

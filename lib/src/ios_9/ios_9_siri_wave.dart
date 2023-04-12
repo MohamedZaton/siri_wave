@@ -61,6 +61,7 @@ class IOS9SiriWaveState extends State<IOS9SiriWave>
     final wavePainter = IOS9SiriWavePainter(
       animationController: _animationController,
       controller: widget.controller,
+      waveColorsList: widget.options.colorsList,
     );
 
     return AnimatedBuilder(

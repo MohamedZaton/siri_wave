@@ -8,6 +8,11 @@ class SiriWaveOptions {
     this.height = 180,
     this.showSupportBar = true,
     this.width = 360,
+    this.colorsList = const [
+      Color.fromRGBO(173, 57, 76, 1),
+      Color.fromRGBO(48, 220, 155, 1),
+      Color.fromRGBO(15, 82, 169, 1),
+    ],
   });
 
   /// Background color of the [SiriWave].
@@ -21,6 +26,8 @@ class SiriWaveOptions {
   ///
   /// Defaults to `180`.
   final double height;
+  /// 3 Colors  List
+  final List<Color> colorsList;
 
   /// Whether to show the support bar on iOS 9 style [SiriWave].
   ///
