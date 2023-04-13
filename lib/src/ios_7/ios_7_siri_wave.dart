@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 
-import '../models/siri_wave_controller.dart';
+import '../../siri_wave.dart';
 import 'ios_7_siri_wave_painter.dart';
 
 class IOS7SiriWave extends StatefulWidget {
-  const IOS7SiriWave({super.key, required this.controller});
+  const IOS7SiriWave({
+    super.key,
+    required this.controller,
+    this.options = const SiriWaveOptions(),
+  });
 
   final SiriWaveController controller;
+  final SiriWaveOptions options;
 
   @override
   IOS7SiriWaveState createState() => IOS7SiriWaveState();
@@ -55,6 +60,7 @@ class IOS7SiriWaveState extends State<IOS7SiriWave>
       painter: IOS7SiriWavePainter(
         animationController: _animationController,
         controller: widget.controller,
+        waveColorsList: widget.options.colorsList,
       ),
     );
 

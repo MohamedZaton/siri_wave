@@ -41,7 +41,7 @@ class _SiriWaveState extends State<SiriWave> {
 
   void _setSiriWaveWidget() {
     _siriWave = widget.style == SiriWaveStyle.ios_7
-        ? IOS7SiriWave(controller: widget._controller)
+        ? IOS7SiriWave(controller: widget._controller, options: widget.options)
         : IOS9SiriWave(controller: widget._controller, options: widget.options);
   }
 

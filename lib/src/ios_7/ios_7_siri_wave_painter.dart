@@ -1,7 +1,6 @@
 import 'dart:math' as math;
 
-import 'package:flutter/animation.dart' show AnimationController;
-import 'package:flutter/rendering.dart';
+import 'package:flutter/material.dart';
 
 import '../models/siri_wave_controller.dart';
 
@@ -26,10 +25,18 @@ class IOS7SiriWavePainter extends CustomPainter {
   IOS7SiriWavePainter({
     required this.animationController,
     required this.controller,
+    this.waveColorsList = const [
+      Colors.white,
+      Colors.white,
+      Colors.white,
+      Colors.white,
+      Colors.white,
+    ],
   }) : super(repaint: animationController);
 
   final AnimationController animationController;
   final SiriWaveController controller;
+  final List<Color> waveColorsList;
 
   static const _amplitudeFactor = .6;
   static const _attenuationFactor = 4;
@@ -67,7 +74,23 @@ class IOS7SiriWavePainter extends CustomPainter {
     // Interpolate amplitude and speed values.
     controller.lerp();
 
-    for (final curve in _curves) {
+    for (int i = 0; i < _curves.length; i++) {
+      var curve = _curves[i];
+      final path = Path()..moveTo(0, maxHeight);
+      // Cycle the graph from -X to +X every pixelDepth and draw the line
+      for (var i = -_graphX; i <= _graphX; i += _pixelDepth) {
+        final x = _xPos(i, size);
+        final y = maxHeight + _yPos(i, curve.attenuation, maxHeight);
+        path.lineTo(x, y);
+      }
+
+      final paint = Paint()
+        ..color = waveColorsList[i % _curves.length].withOpacity(curve.opacity)
+        ..strokeWidth = curve.width
+        ..style = PaintingStyle.stroke;
+      canvas.drawPath(path, paint);
+    }
+    /* for (final curve in _curves) {
       final path = Path()..moveTo(0, maxHeight);
       // Cycle the graph from -X to +X every pixelDepth and draw the line
       for (var i = -_graphX; i <= _graphX; i += _pixelDepth) {
@@ -81,7 +104,7 @@ class IOS7SiriWavePainter extends CustomPainter {
         ..strokeWidth = curve.width
         ..style = PaintingStyle.stroke;
       canvas.drawPath(path, paint);
-    }
+    }*/
 
     _phase = (_phase + (math.pi / 2) * controller.speed) % (2 * math.pi);
   }
