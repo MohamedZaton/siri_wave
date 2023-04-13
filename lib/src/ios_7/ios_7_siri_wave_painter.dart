@@ -85,7 +85,7 @@ class IOS7SiriWavePainter extends CustomPainter {
       }
 
       final paint = Paint()
-        ..color = waveColorsList[i].withOpacity(curve.opacity)
+        ..color = waveColorsList[i % 3].withOpacity(curve.opacity)
         ..strokeWidth = curve.width
         ..style = PaintingStyle.stroke;
       canvas.drawPath(path, paint);
