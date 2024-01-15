@@ -84,7 +84,7 @@ class SiriWaveController {
   void setFrequency(int newFrequency) => frequency = newFrequency;
 
   /// Set a new interpolated value for the `speed`.
-  void setSpeed(double newSpeed) => speed = newSpeed;
+  void  setSpeed(double newSpeed) => speed = newSpeed;
   /// Set a new   value for the `Pause`.
   void setPause(bool newPause) => isPause = newPause;
 }

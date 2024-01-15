@@ -35,11 +35,14 @@ class IOS9SiriWaveState extends State<IOS9SiriWave>
     if (widget.controller.amplitude > 0 && widget.controller.speed > 0) {
       _animationController.repeat();
     }
+    Future.delayed(const Duration(seconds: 2), () {
+      if(widget.controller.isPause){
+        widget.controller.setSpeed(0.2);
+        _animationController.stop(canceled:false);
+      }
+    });
 
-    if(widget.controller.isPause){
 
-      _animationController.stop(canceled:false);
-    }
     super.initState();
   }
 
@@ -52,6 +55,7 @@ class IOS9SiriWaveState extends State<IOS9SiriWave>
     } else if (!_animationController.isAnimating &&
         (widget.controller.amplitude > 0 || widget.controller.speed > 0)) {
       _animationController.repeat();
+
     }
   }
 
@@ -64,6 +68,8 @@ class IOS9SiriWaveState extends State<IOS9SiriWave>
   @override
   Widget build(BuildContext context) {
     const supportLinePainter = SupportLinePainter();
+
+
     final wavePainter = IOS9SiriWavePainter(
       animationController: _animationController,
       controller: widget.controller,
