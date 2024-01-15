@@ -15,6 +15,7 @@ class SiriWaveController {
     this.amplitude = 1,
     this.color = Colors.white,
     this.frequency = 6,
+    this.isPause = false,
     this.speed = .2,
   })  : _interpolation = _Interpolation(amplitude, speed),
         assert(amplitude >= 0 && amplitude <= 1),
@@ -46,6 +47,7 @@ class SiriWaveController {
   ///
   /// The value must be in the `[0, 1]` range.
   double speed;
+  bool isPause ;
 
   final _Interpolation _interpolation;
 
@@ -83,4 +85,6 @@ class SiriWaveController {
 
   /// Set a new interpolated value for the `speed`.
   void setSpeed(double newSpeed) => speed = newSpeed;
+  /// Set a new   value for the `Pause`.
+  void setPause(bool newPause) => isPause = newPause;
 }

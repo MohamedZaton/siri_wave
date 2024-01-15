@@ -31,8 +31,14 @@ class IOS9SiriWaveState extends State<IOS9SiriWave>
       // duration value does not have any affect on the animation.
       duration: const Duration(seconds: 1),
     );
+
     if (widget.controller.amplitude > 0 && widget.controller.speed > 0) {
       _animationController.repeat();
+    }
+
+    if(widget.controller.isPause){
+
+      _animationController.stop(canceled:false);
     }
     super.initState();
   }

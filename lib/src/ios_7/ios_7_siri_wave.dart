@@ -33,6 +33,10 @@ class IOS7SiriWaveState extends State<IOS7SiriWave>
     if (widget.controller.amplitude > 0 && widget.controller.speed > 0) {
       _animationController.repeat();
     }
+    if(widget.controller.isPause){
+
+      _animationController.stop(canceled:false);
+    }
     super.initState();
   }
 

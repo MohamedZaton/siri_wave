@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
   var _showSupportBar = true;
   var _speed = .2;
   final _isSelected = [false, true];
-  final _controller = SiriWaveController();
+  final _controller = SiriWaveController(isPause: true);
   var _currentColor = Colors.white;
 
   void _changeColor(Color color) {
