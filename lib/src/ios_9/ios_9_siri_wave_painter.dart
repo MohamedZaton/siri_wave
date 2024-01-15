@@ -31,6 +31,7 @@ class IOS9SiriWavePainter extends CustomPainter {
   IOS9SiriWavePainter( {
     required this.animationController,
     required this.controller,
+    required this.isPause,
      this.waveColorsList=const [
        Color.fromRGBO(173, 57, 76, 1),
        Color.fromRGBO(48, 220, 155, 1),
@@ -43,6 +44,7 @@ class IOS9SiriWavePainter extends CustomPainter {
   }
   final AnimationController animationController;
   final SiriWaveController controller;
+  final bool isPause ;
   final List<Color> waveColorsList ;
 
   static const _amplitudeFactor = .8;
@@ -78,7 +80,7 @@ class IOS9SiriWavePainter extends CustomPainter {
         _getRandomRange(_despawnTimeoutRanges).toDouble();
     wave.offsets[ci] = _getRandomRange(_offsetRanges).toDouble();
     wave.speeds[ci] = _getRandomRange(_speedRanges).toDouble();
-    wave.finalAmplitudes[ci] = _getRandomRange(_amplitudeRanges).toDouble();
+    wave.finalAmplitudes[ci] = isPause?1.0:_getRandomRange(_amplitudeRanges).toDouble();
     wave.widths[ci] = _getRandomRange(_widthRanges).toDouble();
     wave.verses[ci] = _getRandomRange([-1, 1]).toDouble();
   }
